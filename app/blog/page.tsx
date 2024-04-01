@@ -4,7 +4,12 @@ import Image from 'next/image';
 import { getPosts, getSlugs } from '../lib/postsFromFile';
 
 
-export async function generateStaticParams() {
+interface BlogPageParams {
+  slug: string;
+}
+
+export async function generateStaticParams({ params }: { params: BlogPageParams }) {
+  const { slug } = params;
   const slugs = await getSlugs();
   return slugs.map((slug) => ({ slug })); 
 }

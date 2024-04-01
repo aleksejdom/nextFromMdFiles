@@ -1,10 +1,15 @@
 import Heading from '../../components/Heading';
-import { getPostsFromFiles } from '../../lib/postsFromFile';
+import { getPostsFromFiles, getSlugs } from '../../lib/postsFromFile';
 import Image from 'next/image'; 
 
 
 interface BlogPageParams {
   slug: string;
+}
+
+export async function generateStaticParams() {
+  const slugs = await getSlugs();
+  return slugs.map((slug) => ({ slug }));
 }
 
 export default async function BlogPage({ params }: { params: BlogPageParams }) {
